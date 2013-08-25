@@ -1,0 +1,53 @@
+<div class="row">
+<center>
+  <div class="offset4" style="margin-left: 0px;">
+    <h3><div style="margin-left: 0px;">TaskMe::Add Task</div></h3>
+    <h6><div style="text-transform: none;color: #DE8484;">(Add new tasks to your Asana workspace)</div></h6>
+      <%= form_tag "/pages/index" do %>
+	<table cellpadding="5" >
+	  <tr>
+	    <td>Task to add  </td><td><%= text_field_tag "task", "", :title => "Add tasks to Asana workspace"  %></td>
+	  </tr>
+          <tr>
+	    <td>Assigned to  </td><td><%= text_field_tag "assignee", "", :title => "Assignee email for the task"  %></td>
+	  </tr>
+	  <tr>
+	    <td>Your API number <a href="http://app.asana.com/-/account_api" target="_blank" >[?]</a></td>
+	    <td><%= text_field_tag "api", params[:api], :title => "Asana api key", :class => "mask"%></td>
+          </tr>
+          <tr>
+	    <td colspan="2" align="right" ><%= submit_tag "Add Task" , :class => "btn btn-primary" %></td>
+          </tr>
+	</table>
+      <% end %>
+      <%= @status %>
+  </div>
+</center>
+</div>
+
+
+<!--tooltip code goes here -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<script>
+  $(function() {
+    var tooltips = $( "[title]" ).tooltip({ position: { my: "left+15 center", at: "right center" } });
+    $('.mask').attr('type', 'password');    
+  });
+
+  var inp = document.querySelector( '.mask' );
+  inp.addEventListener( 'focus', function(){
+    inp.type = 'text';
+  });
+  inp.addEventListener( 'blur', function(){
+    inp.type = 'password';
+  });
+</script>
+
+<style>
+  label { display: inline-block; width: 5em;}
+  fieldset div {margin-bottom: 2em;}
+  fieldset .help {display: inline-block;}
+  .ui-tooltip {width: 220px; height: 20px; color: #1AAAF3; background-color: #D1D3D4;}
+</style>
